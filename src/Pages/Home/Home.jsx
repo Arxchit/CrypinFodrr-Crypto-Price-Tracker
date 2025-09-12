@@ -34,7 +34,14 @@ const Home = () => {
         <h1>Largest <br/> Crypto Marketplace</h1>
         <p>Welcome to the world's Largest cryptocurrency marketplace. Sign up to explore more about cryptos.</p>
         <form onSubmit={searchHandler}>
-          <input onChange={inputHandler} list='coinlist' type="text" placeholder='Search Crypto' required />
+          <input
+            onChange={inputHandler}
+            value={input}
+            list='coinlist'
+            type="text"
+            placeholder='Search Crypto'
+            required
+          />
 
           <datalist id='coinlist'>
             {allCoin.map((item, index) => (<option key={index} value={item.name}/>))}
@@ -53,11 +60,12 @@ const Home = () => {
           <p className='market-cap' style={{textAlign: "right"}}>Market Cap</p>
         </div>
         {
+          Array.isArray(displayCoin) && displayCoin.length > 0 &&
           displayCoin.slice(0,10).map((item, index) => (
             <Link to={`/coin/${item.id}`} className="table-layout" key={index}>
               <p>{item.market_cap_rank}</p>
               <div>
-                <img src= {item.image} alt="" />
+                <img src={item.image} alt="" />
                 <p>{item.name +  ' - '  + item.symbol}</p>
               </div>
               <p>{currency.symbol} {item.current_price.toLocaleString()}</p>
@@ -65,6 +73,10 @@ const Home = () => {
               <p className='market-cap' style={{textAlign : "right"}}>{item.market_cap.toLocaleString()}</p>
             </Link>
           ))
+        }
+        {
+          Array.isArray(displayCoin) && displayCoin.length === 0 &&
+          <div style={{textAlign: "center", padding: "2rem"}}>No coins found.</div>
         }
       </div>
     </div>
