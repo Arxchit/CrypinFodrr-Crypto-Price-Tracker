@@ -1,7 +1,5 @@
 import React, { useState, useContext } from 'react'
 import './Navbar.css'
-import logo from '../../assets/logo.png'
-import arrow from '../../assets/arrow_icon.png'
 import { CoinContext } from '../../Contexts/CoinContext'
 import { HiMenu, HiX } from "react-icons/hi"; // HiX for close icon
 import { Link } from 'react-router-dom'
@@ -34,7 +32,7 @@ const Navbar = () => {
     return (
         <div className='navbar'>
             <Link to={'/'}>
-            <img src={logo} alt="" className='logo' />
+            <img src= "/logo.png" alt="" className='logo' />
             </Link>
 
             {/* Desktop Menu */}
@@ -51,7 +49,7 @@ const Navbar = () => {
                     <option value="eur">EUR</option>
                     <option value="inr">INR</option>
                 </select>
-                <button>Sign Up <img src={arrow} alt="" /></button>
+                <button>Sign Up <img src="/arrow_icon.png" alt="" /></button>
 
                 {/* Hamburger Icon */}
                 <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
