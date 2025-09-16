@@ -12,9 +12,11 @@ const Coin = () => {
   const { currency } = useContext(CoinContext)
 
   const fetchHistoricalData = async () => {
-    const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10&interval=daily`;
+    const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name.toLowerCase()}&days=30&interval=daily`;
+    const options = { method: 'GET', headers: { 'x-cg-demo-api-key': 'CG-vzneZCPhE8oN7cKffrbAKYqp' }, body: undefined};
+
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, options);
       const data = await response.json();
       setHistoricalData(data);
     } catch (error) {
@@ -45,47 +47,47 @@ const Coin = () => {
     const price = coinData.market_data?.current_price?.[currency.name] ?? coinData.market_data?.current_price?.usd;
     return (
       <div className="coin">
-      <div className="coin-name">
-      <img src={coinData.image?.large} alt="" />
-      <p><b>{coinData.name} ({coinData.symbol?.toUpperCase()})</b></p>
-      </div>
-      <div className="coin-chart">
-      <LineChart historicalData={historicalData} />
-      </div>
-      <div className="coin-info">
-      <ul>
-      <li>Crypto Market Rank</li>
-      <li>{coinData.market_cap_rank}</li>
-      </ul>
-      <ul>
-      <li>Current Price</li>
-      <li>{currency.symbol}{price?.toLocaleString()}</li>
-      </ul>
-      <ul>
-      <li>Market Cap</li>
-      <li>
-        {currency.symbol}
-        {coinData.market_data?.market_cap?.[currency.name]?.toLocaleString() ??
-        coinData.market_data?.market_cap?.usd?.toLocaleString()}
-      </li>
-      </ul>
-       <ul>
-        <li>24 Hour High</li>
-        <li>
-          {currency.symbol}
-          {coinData.market_data?.high_24h?.[currency.name]?.toLocaleString() ??
-          coinData.market_data?.high_24h?.usd?.toLocaleString()}
-        </li>
-        </ul>
-        <ul>
-        <li>24 Hour Low</li>
-        <li>
-          {currency.symbol}
-          {coinData.market_data?.low_24h?.[currency.name]?.toLocaleString() ??
-          coinData.market_data?.low_24h?.usd?.toLocaleString()}
-        </li>
-      </ul>
-      </div>
+        <div className="coin-name">
+          <img src={coinData.image?.large} alt="" />
+          <p><b>{coinData.name} ({coinData.symbol?.toUpperCase()})</b></p>
+        </div>
+        <div className="coin-chart">
+          <LineChart historicalData={historicalData} />
+        </div>
+        <div className="coin-info">
+          <ul>
+            <li>Crypto Market Rank</li>
+            <li>{coinData.market_cap_rank}</li>
+          </ul>
+          <ul>
+            <li>Current Price</li>
+            <li>{currency.symbol}{price?.toLocaleString()}</li>
+          </ul>
+          <ul>
+            <li>Market Cap</li>
+            <li>
+              {currency.symbol}
+              {coinData.market_data?.market_cap?.[currency.name]?.toLocaleString() ??
+                coinData.market_data?.market_cap?.usd?.toLocaleString()}
+            </li>
+          </ul>
+          <ul>
+            <li>24 Hour High</li>
+            <li>
+              {currency.symbol}
+              {coinData.market_data?.high_24h?.[currency.name]?.toLocaleString() ??
+                coinData.market_data?.high_24h?.usd?.toLocaleString()}
+            </li>
+          </ul>
+          <ul>
+            <li>24 Hour Low</li>
+            <li>
+              {currency.symbol}
+              {coinData.market_data?.low_24h?.[currency.name]?.toLocaleString() ??
+                coinData.market_data?.low_24h?.usd?.toLocaleString()}
+            </li>
+          </ul>
+        </div>
       </div>
     )
   } else {
