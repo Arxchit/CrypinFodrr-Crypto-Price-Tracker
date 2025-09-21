@@ -125,3 +125,20 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 408px) {
+  /* Hide the signup button */
+  .navbar button {
+    display: none;
+  }
+
+  /* Move currency selector beside hamburger */
+  .nav-right {
+    flex-direction: row-reverse; /* put hamburger first, then currency */
+    gap: 8px;
+  }
+
+  .navbar select {
+    order: 2; /* comes right after hamburger */
+  }
+}
