@@ -3,6 +3,7 @@ import './Navbar.css'
 import { CoinContext } from '../../Contexts/CoinContext'
 import { HiMenu, HiX } from "react-icons/hi"; // HiX for close icon
 import { Link } from 'react-router-dom'
+import logo from "../../assets/logo.png";
 import arrow from "../../assets/arrow_icon.png";
 
 const Navbar = () => {
@@ -33,7 +34,7 @@ const Navbar = () => {
     return (
         <div className='navbar'>
             <Link to={'/'}>
-            <img src='logo.png' alt="logo" className='logo' />
+            <img src={logo} alt="logo" className='logo' />
             </Link>
 
             {/* Desktop Menu */}
